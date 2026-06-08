@@ -49,7 +49,7 @@ function Home() {
         <div className="flex justify-center">
           <div className="relative w-full overflow-hidden rounded-[22px] bg-slate-900 shadow-2xl shadow-slate-900/40">
             <img
-              src="src/assets/slot_img.jpg"
+              src="/slot_img.jpg"
               alt="Doctors discussing patient care"
               className="h-[220px] w-full object-cover opacity-85 saturate-105 sm:h-[300px] lg:h-[360px]"
             />
