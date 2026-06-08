@@ -25,6 +25,7 @@ function AdminDashboard() {
   };
 
   const [doctorForm, setDoctorForm] = useState(emptyDoctor);
+  const [doctorPhotoFile, setDoctorPhotoFile] = useState(null);
   const [editingDoctorId, setEditingDoctorId] = useState(null);
 
   useEffect(() => {
@@ -89,8 +90,13 @@ function AdminDashboard() {
     setDoctorForm({ ...doctorForm, [e.target.name]: e.target.value });
   };
 
+  const onDoctorPhotoChange = (e) => {
+    setDoctorPhotoFile(e.target.files?.[0] || null);
+  };
+
   const resetDoctorForm = () => {
     setDoctorForm(emptyDoctor);
+    setDoctorPhotoFile(null);
     setEditingDoctorId(null);
   };
 
@@ -106,15 +112,19 @@ function AdminDashboard() {
     setSuccessMsg('');
 
     try {
-      const payload = {
-        name: doctorForm.name,
-        email: doctorForm.email,
-        specialization: doctorForm.specialization,
-        experience: Number(doctorForm.experience) || 0,
-        fees: Number(doctorForm.fees) || 0,
-        timings: doctorForm.timings,
-        photo: doctorForm.photo,
-      };
+      const payload = new FormData();
+      payload.append('name', doctorForm.name);
+      payload.append('email', doctorForm.email);
+      payload.append('specialization', doctorForm.specialization);
+      payload.append('experience', String(Number(doctorForm.experience) || 0));
+      payload.append('fees', String(Number(doctorForm.fees) || 0));
+      payload.append('timings', doctorForm.timings);
+
+      if (doctorPhotoFile) {
+        payload.append('photo', doctorPhotoFile);
+      } else if (doctorForm.photo.trim()) {
+        payload.append('photo', doctorForm.photo.trim());
+      }
 
       if (editingDoctorId) {
         await api.put(`/api/doctors/${editingDoctorId}`, payload);
@@ -144,8 +154,9 @@ function AdminDashboard() {
       experience: doc.experience || '',
       fees: doc.fees || '',
       timings: doc.timings || '',
-      photo: doc.photo || '',
+      photo: '',
     });
+    setDoctorPhotoFile(null);
     setActiveTab('doctors');
     setSidebarOpen(false);
   };
@@ -455,7 +466,17 @@ function AdminDashboard() {
                 </label>
 
                 <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
-                  Photo URL
+                  Photo File
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={onDoctorPhotoChange}
+                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm outline-none transition file:mr-4 file:rounded-full file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-700 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
+                  Photo URL <span className="text-xs text-slate-500">(optional fallback)</span>
                   <input
                     type="text"
                     name="photo"

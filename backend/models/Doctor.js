@@ -11,6 +11,10 @@ const doctorSchema = new mongoose.Schema(
     photo: {
       type: String,
       default: "https://via.placeholder.com/150"
+    },
+    photoPublicId: {
+      type: String,
+      default: ''
     }
   },
   { timestamps: true }
