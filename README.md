@@ -2,6 +2,7 @@
 
 A full-stack healthcare appointment management system built using React.js, Node.js, Express.js, and MongoDB. MediCare Plus streamlines the appointment booking process by connecting patients with doctors through an intuitive and responsive web application. The platform provides dedicated dashboards for patients and administrators, enabling efficient healthcare management and appointment tracking.
 
+Live Demo: https://app.medicareplus.free.je
 ---
 
 ## 📖 Overview
