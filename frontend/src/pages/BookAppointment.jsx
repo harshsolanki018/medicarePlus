@@ -20,7 +20,6 @@ function BookAppointment() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // load doc from backend
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
@@ -71,9 +70,9 @@ function BookAppointment() {
         'Reason / Symptoms: ' + form.reason;
 
       const payload = {
-        doctorId: form.doctorId,   
-        date: form.date,           
-        reason: reasonText,        
+        doctorId: form.doctorId,
+        date: form.date,
+        reason: reasonText,
       };
 
       await api.post('/api/appointments', payload);
@@ -96,20 +95,23 @@ function BookAppointment() {
     }
   };
 
+  const inputClass =
+    'w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100';
+
   return (
-    <div className="page">
-      <h2>Book an Appointment</h2>
-      <p className="section-subtitle">
-        Fill in your details and contact information so the clinic can reach you.
-      </p>
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-2xl font-semibold text-slate-900">Book an Appointment</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Fill in your details and contact information so the clinic can reach you.
+        </p>
+      </div>
 
-      {error && <p className="error-text">{error}</p>}
-      {success && <p className="info-text">{success}</p>}
-      {success && <p className="success-box">{success}</p>}
+      {error && <p className="text-sm font-medium text-red-700">{error}</p>}
+      {success && <p className="text-sm font-medium text-blue-700">{success}</p>}
 
-
-      <form onSubmit={onSubmit} className="form wide">
-        <label>
+      <form onSubmit={onSubmit} className="mx-auto flex w-full max-w-2xl flex-col gap-4">
+        <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Patient Name
           <input
             type="text"
@@ -117,10 +119,11 @@ function BookAppointment() {
             value={form.patientName}
             onChange={onChange}
             required
+            className={inputClass}
           />
         </label>
 
-        <label>
+        <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Age
           <input
             type="number"
@@ -129,10 +132,11 @@ function BookAppointment() {
             onChange={onChange}
             min="0"
             required
+            className={inputClass}
           />
         </label>
 
-        <label>
+        <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Contact Number
           <input
             type="tel"
@@ -140,10 +144,11 @@ function BookAppointment() {
             value={form.contactNumber}
             onChange={onChange}
             required
+            className={inputClass}
           />
         </label>
 
-        <label>
+        <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Email (optional)
           <input
             type="email"
@@ -151,16 +156,18 @@ function BookAppointment() {
             value={form.email}
             onChange={onChange}
             placeholder="you@example.com"
+            className={inputClass}
           />
         </label>
 
-        <label>
+        <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Choose Doctor
           <select
             name="doctorId"
             value={form.doctorId}
             onChange={onChange}
             required
+            className={inputClass}
           >
             <option value="">Select a doctor</option>
             {doctors.map((d) => {
@@ -175,48 +182,55 @@ function BookAppointment() {
           </select>
         </label>
 
-        <label>
-          Appointment Date
-          <input
-            type="date"
-            name="date"
-            value={form.date}
-            onChange={onChange}
-            required
-          />
-        </label>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
+            Appointment Date
+            <input
+              type="date"
+              name="date"
+              value={form.date}
+              onChange={onChange}
+              required
+              className={inputClass}
+            />
+          </label>
 
-        <label>
-          Preferred Time
-          <input
-            type="time"
-            name="time"
-            value={form.time}
-            onChange={onChange}
-            required
-          />
-        </label>
+          <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
+            Preferred Time
+            <input
+              type="time"
+              name="time"
+              value={form.time}
+              onChange={onChange}
+              required
+              className={inputClass}
+            />
+          </label>
+        </div>
 
-        <label>
+        <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
           Reason / Symptoms
           <textarea
             name="reason"
             value={form.reason}
             onChange={onChange}
-            rows="3"
+            rows="4"
             placeholder="Describe your problem in short"
+            className={inputClass}
           />
         </label>
 
-        <button type="submit" className="btn primary full" disabled={submitting}>
+        <button
+          type="submit"
+          disabled={submitting}
+          className="inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+        >
           {submitting ? 'Booking...' : 'Book Appointment'}
         </button>
       </form>
 
       {loadingDoctors && (
-        <p className="info-text" style={{ marginTop: '10px' }}>
-          Loading doctors list...
-        </p>
+        <p className="mt-2 text-sm font-medium text-blue-700">Loading doctors list...</p>
       )}
     </div>
   );

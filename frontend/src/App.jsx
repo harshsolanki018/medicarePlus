@@ -14,10 +14,10 @@ import AdminDashboard from './pages/AdminDashboard.jsx';
 
 function App() {
   return (
-    <div className="app-root">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_#e0f2fe_0,_#f5f7fb_45%,_#eef2ff_100%)] text-slate-900">
       <Navbar />
 
-      <main className="main-container">
+      <main className="mx-auto w-full max-w-6xl px-4 pb-10 pt-28 sm:pt-32">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/doctors" element={<DoctorList />} />
