@@ -3,21 +3,40 @@ import { Link } from 'react-router-dom';
 function Home() {
   return (
     <div className="space-y-8">
-      <section className="grid grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] items-start gap-3 rounded-[28px] bg-white/85 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-200/70 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,0.95fr)] sm:p-5 lg:gap-8 lg:p-8">
-        <div className="space-y-4">
-          <p className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-medium text-sky-700 before:inline-block before:h-2 before:w-2 before:rounded-full before:bg-emerald-500 before:shadow-[0_0_0_4px_rgba(34,197,94,0.22)] before:content-['']">
-            Trusted Online Healthcare
-          </p>
-          <div className="space-y-3">
-            <h1 className="max-w-2xl text-[clamp(1.9rem,5.3vw,4rem)] font-bold leading-tight text-slate-900">
-              Your Health, Our Priority at <span className="text-blue-600">MediCare Plus</span>
-            </h1>
-            <p className="max-w-2xl text-[clamp(0.92rem,2.2vw,1.05rem)] leading-relaxed text-slate-600">
-              Book appointments with trusted doctors, manage your visits, and get care on
-              time with our simple online system.
+      <section className="space-y-4 rounded-[28px] bg-white/85 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-200/70 sm:p-5 lg:p-8">
+        <div className="grid gap-4 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.95fr)] lg:gap-8">
+          <div className="space-y-4">
+            <p className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[11px] font-medium text-sky-700 before:inline-block before:h-2 before:w-2 before:rounded-full before:bg-emerald-500 before:shadow-[0_0_0_4px_rgba(34,197,94,0.22)] before:content-['']">
+              Trusted Online Healthcare
             </p>
+            <div className="space-y-3">
+              <h1 className="max-w-2xl text-[clamp(1.9rem,5.3vw,4rem)] font-bold leading-tight text-slate-900">
+                Your Health, Our Priority at <span className="text-blue-600">MediCare Plus</span>
+              </h1>
+              <p className="max-w-2xl text-[clamp(0.92rem,2.2vw,1.05rem)] leading-relaxed text-slate-600">
+                Book appointments with trusted doctors, manage your visits, and get care on
+                time with our simple online system.
+              </p>
+            </div>
           </div>
 
+          <div className="flex justify-center">
+            <div className="relative w-full overflow-hidden rounded-[22px] bg-slate-900 shadow-2xl shadow-slate-900/40">
+              <img
+                src="/slot_img.jpg"
+                alt="Doctors discussing patient care"
+                className="h-[220px] w-full object-cover opacity-85 saturate-105 sm:h-[300px] lg:h-[360px]"
+              />
+              <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-slate-900/90 px-4 py-3 text-slate-100 shadow-xl shadow-slate-900/50">
+                <p className="text-xs uppercase tracking-wide text-slate-400">Today&apos;s Availability</p>
+                <p className="text-lg font-semibold">25+ Open Slots</p>
+                <p className="text-xs text-slate-300">Book now and avoid long waiting time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-[22px] bg-slate-50 p-3 shadow-inner shadow-slate-900/5 ring-1 ring-slate-200/70">
           <div className="grid grid-cols-2 gap-2">
             <Link
               to="/book-appointment"
@@ -33,7 +52,7 @@ function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 text-[10px] text-slate-600 sm:text-xs">
+          <div className="mt-3 grid grid-cols-3 gap-2 text-[10px] text-slate-600 sm:text-xs">
             <span className="min-w-0 whitespace-nowrap rounded-full bg-slate-200/70 px-2 py-1 text-center">
               Instant Booking
             </span>
@@ -43,21 +62,6 @@ function Home() {
             <span className="min-w-0 whitespace-nowrap rounded-full bg-slate-200/70 px-2 py-1 text-center">
               Verified Doctors
             </span>
-          </div>
-        </div>
-
-        <div className="flex justify-center">
-          <div className="relative w-full overflow-hidden rounded-[22px] bg-slate-900 shadow-2xl shadow-slate-900/40">
-            <img
-              src="/slot_img.jpg"
-              alt="Doctors discussing patient care"
-              className="h-[220px] w-full object-cover opacity-85 saturate-105 sm:h-[300px] lg:h-[360px]"
-            />
-            <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-slate-900/90 px-4 py-3 text-slate-100 shadow-xl shadow-slate-900/50">
-              <p className="text-xs uppercase tracking-wide text-slate-400">Today&apos;s Availability</p>
-              <p className="text-lg font-semibold">25+ Open Slots</p>
-              <p className="text-xs text-slate-300">Book now and avoid long waiting time.</p>
-            </div>
           </div>
         </div>
       </section>
